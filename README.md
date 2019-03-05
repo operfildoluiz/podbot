@@ -1,6 +1,6 @@
 # podBot
 
-[![logo.png](https://i.postimg.cc/GhGmr651/logo.png)](https://postimg.cc/569VSKJP)
+![](https://i.postimg.cc/GhGmr651/logo.png =250x)]
 
 🤖 PodBot é um podcast feito por robôs. 🤖 
 
@@ -13,7 +13,7 @@
 
 # Sobre o projeto
 
-O projeto serve de base para meus estudos e aplicar alguns conhecimentos que tenho adquirido sobre automação de tarefas. O podBot foi inspirado no repositório [video-maker](https://github.com/filipedeschamps/video-maker/) do [@https://github.com/filipedeschamps/video-maker/](https://github.com/filipedeschamps/)
+O projeto serve de base para meus estudos e aplicar alguns conhecimentos que tenho adquirido sobre automação de tarefas. O podBot foi inspirado no repositório [video-maker](https://github.com/filipedeschamps/video-maker/) do [@FilipeDeschamps](https://github.com/filipedeschamps/)
 
 # Colaborando
 
