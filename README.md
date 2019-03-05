@@ -1,6 +1,6 @@
 # podBot
 
-![](https://i.postimg.cc/GhGmr651/logo.png =250x)]
+![ ](https://i.postimg.cc/GhGmr651/logo.png)
 
 🤖 PodBot é um podcast feito por robôs. 🤖 
 
