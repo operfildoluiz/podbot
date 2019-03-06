@@ -1,26 +1,84 @@
 const readline = require('readline-sync'),
       axios = require('axios'),
       fs = require('fs'),
+      rimraf = require("rimraf"),
       config = require('./config')
 
 class Mainbot {
 
     constructor() {
-        this.content = {} 
+        this.content = {}
     }
 
-    async init () {
-        this.content.url = config.cachedPage || await this.askForPastebinSource()
+    async init (downloadMp3 = true) {
+        console.log('[BOT]','Iniciando a preparação do episódio')
+
+        await this.createTempDir()
+
+        this.content.title = config.mockupName || this.askForTitle()
+        // this.content.description = config.mockupDescription || this.askForDescription()
+        this.content.number = config.mockupNumber || this.askForEpisodeNumber()
+        this.content.url = config.mockupUrl || this.askForPastebinSource()
         this.content.originText = await this.getTextFromPastebin()
-        this.content.sentences = this.extractSentencesFromText() 
-        
-        await this.assignIdIntoSentences()
-        await this.assignMp3IntoSentences()
-        await this.downloadMp3()
+        this.content.sentences = this.extractSentencesFromText()
+
+        if (downloadMp3) {
+            await this.assignIdIntoSentences()
+            await this.assignMp3IntoSentences()
+            await this.downloadMp3()
+        }
+
+    }
+
+    async end() {
+        await this.deleteTempDir()
+
+        console.log('[BOT]','Episódio finalizado!')
+        console.log('[BOT]','Conferir os arquivos na pasta [/result]')
     }
 
     getContent() {
         return this.content;
+    }
+
+    async createTempDir() {
+        console.log('=>', 'Criando pastas temporárias...');
+
+        let tempDir = './temp'
+        let resultDdir = './result'
+
+        if (!fs.existsSync(resultDdir)){
+            await fs.mkdirSync(resultDdir)
+        }
+
+        if (!fs.existsSync(tempDir)){
+            return await fs.mkdirSync(tempDir)
+        }
+
+    }
+
+    async deleteTempDir() {
+        console.log('=>', 'Removendo pasta temporária...');
+
+        let dir = './temp'
+
+        return await rimraf.sync(dir);
+
+    }
+
+    askForTitle() {
+        const res = readline.question('Qual o titulo do episodio: ')
+        return res
+    }
+
+    askForDescription() {
+        const res = readline.question('Insira uma descricao curta: ')
+        return res
+    }
+
+    askForEpisodeNumber() {
+        const res = readline.question('Qual o numero desse episodio: ')
+        return res
     }
 
     askForPastebinSource() {
@@ -28,9 +86,9 @@ class Mainbot {
         return res
     }
 
-     async getTextFromPastebin () {
+    async getTextFromPastebin () {
         console.log('=>', 'Buscando o texto no Pastebin...');
-        
+
         return await axios.get(this.content.url).then(res => res.data);
     }
 
@@ -62,15 +120,15 @@ class Mainbot {
                                                 voice:"pt-BR"
                                             }
                                         })
-            
+
                 sentence.id = res.data.id;
-                sentence.shortId = res.data.id.split('-')[0]                       
+                sentence.shortId = res.data.id.split('-')[0]
             } catch (e) {
                 console.log('[ERR] Assigning Id', e)
                 return false;
             }
         }
-    }    
+    }
 
     async assignMp3IntoSentences() {
         console.log('=>', 'Buscando o mp3 no Google Translate...');
@@ -78,21 +136,21 @@ class Mainbot {
         const sleep = (time) => new Promise(resolve => setTimeout(resolve, time));
 
         for(let sentence of this.content.sentences) {
-            
+
             try {
                 await sleep(1500);
                 let res = await axios.get(config.api + sentence.id)
-                sentence.mp3 = res.data.location;  
+                sentence.mp3 = res.data.location;
             } catch (e) {
                 console.log('[ERR] Assigning MP3', e)
                 return false;
             }
         }
-    }  
+    }
 
     async downloadMp3() {
         console.log('=>', 'Baixando os mp3 base...');
-        
+
         for(let sentence of this.content.sentences) {
 
             await axios.request({
@@ -103,7 +161,7 @@ class Mainbot {
                   'Content-Type': 'audio/mpeg',
                 },
               }).then((result) => {
-                const outputFilename = `mp3/${sentence.shortId}.mp3`;
+                const outputFilename = `temp/${sentence.shortId}.mp3`;
                 fs.writeFileSync(outputFilename, result.data);
                 return outputFilename;
               });

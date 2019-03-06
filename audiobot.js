@@ -8,15 +8,29 @@ class Audiobot {
         this.content = content;
     }
 
+    getSentences() {
+        return this.content.sentences;
+    }
+
+    async init(increaseSpeed = true) {
+        await this.mergeAudio();
+
+        if (increaseSpeed) {
+            await this.increaseSpeed();
+        }
+
+        return true;
+    }
+
     async mergeAudio() {
         console.log('=>', 'Gerando o mp3 mergeado...');
 
         let assets = [config.intro];
-        this.content.sentences.forEach(sentence => assets.push(`mp3/${sentence.shortId}.mp3`));
+        this.content.sentences.forEach(sentence => assets.push(`temp/${sentence.shortId}.mp3`));
 
         return await new Promise((resolve, reject) => {
             audioconcat(assets)
-            .concat('mp3/concat.mp3')
+            .concat('temp/concat.mp3')
             .on('error', e => {
                 console.log('[ERR] Concatenating', e) 
                 reject(e)
@@ -28,9 +42,9 @@ class Audiobot {
     async increaseSpeed() {
         console.log('=>', 'Aumentando a velocidade...');
 
-        return await ffmpeg('mp3/concat.mp3')
+        return await ffmpeg('temp/concat.mp3')
                 .audioFilters(['atempo=2.0','asetrate=44100*1/2'])
-                .save('result.mp3')
+                .save(`result/${this.content.number}_audio.mp3`)
     }
 }
 
