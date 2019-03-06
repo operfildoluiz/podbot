@@ -5,7 +5,7 @@
 - [x] Recebe a pauta e transcrição
 - [x] Converte em audio
 - [x] Manipula o áudio e produz o episódio
-- [ ] Cria uma capa para o episódio
+- [X] Cria uma capa para o episódio
 - [ ] Publica diretamente nos agregadores
 - [ ] Compartilha nas redes sociais
 

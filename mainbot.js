@@ -15,11 +15,9 @@ class Mainbot {
 
         await this.createTempDir()
 
-        this.content.title = config.mockupName || this.askForTitle()
-        // this.content.description = config.mockupDescription || this.askForDescription()
-        this.content.number = config.mockupNumber || this.askForEpisodeNumber()
         this.content.url = config.mockupUrl || this.askForPastebinSource()
         this.content.originText = await this.getTextFromPastebin()
+        this.extractEpisodeDetails()
         this.content.sentences = this.extractSentencesFromText()
 
         if (downloadMp3) {
@@ -61,24 +59,14 @@ class Mainbot {
         console.log('=>', 'Removendo pasta temporária...');
 
         let dir = './temp'
+        await this.sleep(1500);
 
-        return await rimraf.sync(dir);
+        try {
+            return await rimraf.sync(dir);
+        } catch(e) {
+            return false;
+        }
 
-    }
-
-    askForTitle() {
-        const res = readline.question('Qual o titulo do episodio: ')
-        return res
-    }
-
-    askForDescription() {
-        const res = readline.question('Insira uma descricao curta: ')
-        return res
-    }
-
-    askForEpisodeNumber() {
-        const res = readline.question('Qual o numero desse episodio: ')
-        return res
     }
 
     askForPastebinSource() {
@@ -92,11 +80,24 @@ class Mainbot {
         return await axios.get(this.content.url).then(res => res.data);
     }
 
+    extractEpisodeDetails() {
+        console.log('=>', 'Extraindo os detalhes do episódio...');
+
+        let arr = this.content.originText.split('\r\n\r\n').slice(0,3);
+
+        this.content.number = arr[0]
+        this.content.title = arr[1]
+        this.content.description = arr[2]
+
+        return true;
+    }
+    
     extractSentencesFromText() {
         console.log('=>', 'Extraindo as sentenças do texto...');
 
         const sentences = [];
-        this.content.originText.split('\r\n\r\n').forEach(paragraph => {
+        let arr = this.content.originText.split('\r\n\r\n');
+        arr.slice(4).forEach(paragraph => {
             sentences.push({
                 text: paragraph,
                 host: 'main',
@@ -133,12 +134,10 @@ class Mainbot {
     async assignMp3IntoSentences() {
         console.log('=>', 'Buscando o mp3 no Google Translate...');
 
-        const sleep = (time) => new Promise(resolve => setTimeout(resolve, time));
-
         for(let sentence of this.content.sentences) {
 
             try {
-                await sleep(1500);
+                await this.sleep(1500);
                 let res = await axios.get(config.api + sentence.id)
                 sentence.mp3 = res.data.location;
             } catch (e) {
@@ -166,6 +165,10 @@ class Mainbot {
                 return outputFilename;
               });
         }
+    }
+
+    sleep (time)  { 
+        return new Promise(resolve => setTimeout(resolve, time)) 
     }
 
 }

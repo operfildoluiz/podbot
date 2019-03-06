@@ -43,7 +43,7 @@ class Audiobot {
         console.log('=>', 'Aumentando a velocidade...');
 
         return await ffmpeg('temp/concat.mp3')
-                .audioFilters(['atempo=2.0','asetrate=44100*1/2'])
+                .audioFilters(['atempo=1.5','asetrate=44100*1/2'])
                 .save(`result/${this.content.number}_audio.mp3`)
     }
 }
