@@ -19,12 +19,10 @@ O PodBot será um podcast, mas em breve também será uma ferramenta gratuita pa
 
 # Sobre o projeto
 
-A proposta desse projeto é despertar o interesse de desenvolvedores a criarem coisas realmente muito maneiras. Como sou podcaster ([podTag](http://podtag.com.br)), escolhi esse nicho para criar um podcast criado, apresentado e distribuido por pequenos robôs. O projeto serve de base para meus estudos e aplicar alguns conhecimentos que tenho adquirido sobre automação de tarefas. O podBot foi inspirado no repositório [video-maker](https://github.com/filipedeschamps/video-maker/) do [@FilipeDeschamps](https://github.com/filipedeschamps/)
+A proposta desse projeto é despertar o interesse de desenvolvedores a criarem coisas realmente muito maneiras. Como sou podcaster ([podTag](http://podtag.com.br)), escolhi esse nicho para gerar podcasts criados, apresentados e distribuidos por pequenos robôs. O projeto serve de base para meus estudos e aplicar alguns conhecimentos que tenho adquirido sobre automação de tarefas. O podBot foi inspirado no repositório [video-maker](https://github.com/filipedeschamps/video-maker/) do [@FilipeDeschamps](https://github.com/filipedeschamps/)
 
 # Colaborando
 
-O projeto em breve terá sua estrutura básica pronta. Enquanto isso, pull requests serão mantidas "on-hold" para não conflitar com algumas funcionalidades a serem desenvolvidas.
-
-Assim que estiver operacional (não necessariamente bonito 😂), as pull requests serão aceitas
+O projeto em breve terá sua estrutura básica pronta. Enquanto isso, pull requests serão mantidas "on-hold" para não conflitar com algumas funcionalidades a serem desenvolvidas. Assim que estiver operacional (não necessariamente bonito 😂), as pull requests serão aceitas
 
 ![ ](https://i.postimg.cc/GhGmr651/logo.png)
