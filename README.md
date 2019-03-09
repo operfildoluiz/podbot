@@ -19,14 +19,11 @@ O PodBot será um podcast, mas em breve também será uma ferramenta gratuita pa
 
 # Os "hosts"
 
-![](sources/Lea_mini.png)
-Lea
 
-![](sources/Samanta_mini.png)
-Samanta, a voz 
-
-![](sources/Willy_mini.png)
-Willy
+| Samanta | Willy | Lea |
+|--|--|--|
+| ![](sources/Lea_mini.png) | ![](sources/Samanta_mini.png) | ![](sources/Willy_mini.png) |
+| AWS Polly "Vitoria" | AWS Polly "Ricardo" | Google TTS |
 
 # Sobre o projeto
 
