@@ -40,8 +40,12 @@ class Mainbot {
 
     }
 
-    async end() {
+    async end(sucessful = true) {
         await this.deleteTempDir()
+
+        if (!sucessful) {
+            console.log('[BOT]', 'Cancelando devido a algum erro');
+        }
 
         console.log('[BOT]','Episódio finalizado!')
         console.log('[BOT]','Conferir os arquivos na pasta [/result]')
@@ -93,14 +97,17 @@ class Mainbot {
     }
 
     extractEpisodeDetails() {
+        // Format: Host #99 - Title of episode
         console.log('=>', 'Extraindo os detalhes do episódio...');
 
-        let arr = this.content.originText.split('\r\n\r\n').slice(0,4);
+        let sentence = this.content.originText.split('\r\n\r\n').slice(0,1);
 
-        this.content.number = arr[0]
-        this.content.title = arr[1]
-        this.content.description = arr[2]
-        this.content.host = arr[3]
+        let arr = sentence[0].split('#')
+        this.content.host = arr[0].trim()
+
+        arr = arr[1].split(' - ')
+        this.content.number = arr[0].trim()
+        this.content.title = arr[1].trim()
 
         return true;
     }
@@ -110,7 +117,15 @@ class Mainbot {
 
         const sentences = [];
         let arr = this.content.originText.split('\r\n\r\n');
-        arr.slice(5).forEach((paragraph, i) => {
+        arr.slice(2).forEach((paragraph, i) => {
+
+            if (paragraph.length > 200 && config.hosts[this.content.host].awsText !== undefined) {
+                console.log('[ERR] Essa frase contém mais de 200 caracteres e não pode ser interpretada pelo Google TTS');
+                console.log('=>',paragraph);
+                this.end(false);
+                process.exit(0)
+            }
+
             sentences.push({
                 shortId: i,
                 text: paragraph,

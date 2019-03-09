@@ -16,7 +16,8 @@ const config = {
             tempo: 1.5,
             origin: 'google'
         },
-    }
+    },
+    mockupUrl: 'https://pastebin.com/raw/i8GTFEfq'
 }
 
 module.exports = config;
