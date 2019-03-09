@@ -1,3 +1,5 @@
+require('dotenv').load();
+
 const Audiobot = require('./audiobot'),
       Imagebot = require('./imagebot'),
       Mainbot = require('./mainbot')

@@ -26,7 +26,7 @@ class Imagebot {
                 .then(image => {
                     return image
                     .print(fontHeader, 50, 50, {
-                        text: 'Novo episódio no podBot',
+                        text: `Apresentado por ${this.content.host} Bot`,
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_TOP
                     }, 500, 500)

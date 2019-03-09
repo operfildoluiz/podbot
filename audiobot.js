@@ -12,12 +12,10 @@ class Audiobot {
         return this.content.sentences;
     }
 
-    async init(increaseSpeed = true) {
-        await this.mergeAudio();
+    async init() {
 
-        if (increaseSpeed) {
-            await this.increaseSpeed();
-        }
+        await this.mergeAudio();
+        await this.increaseSpeed(this.content.host);
 
         return true;
     }
@@ -39,11 +37,13 @@ class Audiobot {
         });
     }
 
-    async increaseSpeed() {
-        console.log('=>', 'Aumentando a velocidade...');
+    async increaseSpeed(host) {
+        let tempo = config.hosts[host].tempo || 1;
+
+        console.log('=>', `Aumentando a velocidade em ${tempo}...`);
 
         return await ffmpeg('temp/concat.mp3')
-                .audioFilters(['atempo=1.5','asetrate=44100*1/2'])
+                .audioFilters(['atempo='+tempo,'asetrate=44100*1/2'])
                 .save(`result/${this.content.number}_audio.mp3`)
     }
 }

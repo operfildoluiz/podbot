@@ -12,10 +12,21 @@ O PodBot será um podcast, mas em breve também será uma ferramenta gratuita pa
 - [x] Converter em audio
 - [x] Manipular o áudio e produz o episódio
 - [X] Criar uma capa para o episódio
-- [ ] Ter mais de um host (apresentador)
+- [X] Ter mais de um host (apresentador)
 - [ ] Publicar diretamente nos agregadores
 - [ ] Compartilhar nas redes sociais
 - [ ] Criar uma interface gráfica
+
+# Os "hosts"
+
+![](sources/Lea_mini.png)
+Lea
+
+![](sources/Samanta_mini.png)
+Samanta, a voz 
+
+![](sources/Willy_mini.png)
+Willy
 
 # Sobre o projeto
 
