@@ -31,7 +31,7 @@ class Imagebot {
                         alignmentY: Jimp.VERTICAL_ALIGN_TOP
                     }, 500, 500)
                     .print(fontTitle, 50, 50, {
-                        text: `"${this.content.title}"`,
+                        text: `${this.content.title}`,
                         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
                         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
                     }, 500, 500)

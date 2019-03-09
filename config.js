@@ -3,7 +3,7 @@ const config = {
     intro: './sources/intro.mp3',
     hosts: {
         'Samanta': {
-            tempo: 1.2,
+            tempo: 1,
             origin: 'polly',
             awsName: 'Vitoria'
         },
@@ -17,7 +17,7 @@ const config = {
             origin: 'google'
         },
     },
-    mockupUrl: 'https://pastebin.com/raw/i8GTFEfq'
+    // mockupUrl: 'https://pastebin.com/raw/i8GTFEfq'
 }
 
 module.exports = config;
