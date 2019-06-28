@@ -9,10 +9,10 @@ const bots = {
 };
 
 async function main() {
-  // await bots.input();
-  // await bots.text();
-  // await bots.audio();
-  // await bots.image();
+  await bots.input();
+  await bots.text();
+  await bots.audio();
+  await bots.image();
   await bots.docs();
 }
 
