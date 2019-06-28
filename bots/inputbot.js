@@ -35,6 +35,12 @@ async function bot() {
     },
     {
       type: "text",
+      name: "keyword",
+      message: "Insira UMA keyword (em inglês) para a capa",
+      initial: "office"
+    },
+    {
+      type: "text",
       name: "url",
       message: "Qual a URL origem do texto?",
       initial: "https://blog.impulso.network/product-owner/"
